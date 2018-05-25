@@ -1,0 +1,8 @@
+---
+- hosts: local
+  vars:
+    app_name: LibreOffice
+    app_url: https://www.libreoffice.org/donate/dl/mac-x86_64/6.0.4/en-GB/LibreOffice_6.0.4_MacOS_x86-64.dmg
+    home_dir: /Users/rajesh.kaushik/
+  roles:
+    - mac_setup

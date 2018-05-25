@@ -1,0 +1,52 @@
+- name: copy vimrc file 
+  copy:
+    src: files/vimrc
+    dest: "{{home_dir}}.vimrc"
+
+- name: copy inputrc file 
+  copy:
+    src: files/inputrc
+    dest: "{{home_dir}}.inputrc"
+
+- local_action: stat path=/Applications/{{ app_name }}.app
+  register: app_exists
+
+- command: mkdir -p ./tmp/
+  when: app_exists.stat.exists == False
+
+- copy: src=files/{{ app_name }}.dmg dest=./tmp/{{ app_name }}.dmg
+  when: app_exists.stat.exists == False
+
+- command: hdiutil attach ./tmp/{{ app_name }}.dmg -nobrowse -mountpoint ./tmp/{{ app_name }}
+  when: app_exists.stat.exists == False
+
+- shell: cp -aR ./tmp/{{ app_name }}/*.app /Applications/{{ app_name }}.app
+  when: app_exists.stat.exists == False
+
+- command: hdiutil detach ./tmp/{{ app_name }}/
+  when: app_exists.stat.exists == False
+
+- command: rm -R ./tmp/
+  when: app_exists.stat.exists == False
+
+- stat: path="{{home_dir}}.bash_profile"
+  register: bash_profile_exists
+
+- name: copy bash_profile
+  copy:
+    src: files/bash_profile
+    dest: "{{home_dir}}.bash_profile"
+  when: bash_profile_exists.stat.exists == False
+
+- name: copy git bash-completion file
+  copy:
+    src: files/git-completion.bash
+    dest: "{{home_dir}}.git-completion.bash"
+
+- name: Test for git-completion in bash_profile
+  shell: cat "{{home_dir}}.bash_profile"
+  register: git_completion
+
+- name: update bash_profile
+  shell: echo "source ~/.git-completion.bash" >> "{{home_dir}}.bash_profile"
+  when: git_completion.stdout.find('git-completion.bash') == -1
