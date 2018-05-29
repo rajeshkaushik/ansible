@@ -1,3 +1,6 @@
+- name: include homebrew package install playbook
+  include: ansible-macos-homebrew-packages.yml
+
 - name: copy vimrc file 
   copy:
     src: files/vimrc
@@ -38,6 +41,8 @@
     dest: "{{home_dir}}.bash_profile"
   when: bash_profile_exists.stat.exists == False
 
+- name: disbale terminal session
+  shell: touch "{{home_dir}}.bash_sessions_disable"
 - name: copy git bash-completion file
   copy:
     src: files/git-completion.bash
