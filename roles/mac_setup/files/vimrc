@@ -6,6 +6,9 @@ highlight SpecialKey ctermfg=DarkGray
 set listchars=tab:>-,trail:~
 set list
 autocmd BufEnter,BufRead *.py setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+execute pathogen#infect()
+filetype plugin indent on
+colorscheme gruvbox
 set tabstop=4
 set shiftwidth=4
 set expandtab

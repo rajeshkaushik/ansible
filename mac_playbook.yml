@@ -1,15 +1,13 @@
 ---
 - hosts: local
   vars:
-    app_name: LibreOffice
-    app_url: https://www.libreoffice.org/donate/dl/mac-x86_64/6.0.4/en-GB/LibreOffice_6.0.4_MacOS_x86-64.dmg
     home_dir: /Users/rajesh.kaushik/
     brew_cask_packages:
      # - 'atom'
-     ## - 'docker'
+      - 'docker'
      ## - 'dropbox'
      # - 'firefox'
-     ## - 'google-chrome'
+      - 'google-chrome'
      # - 'google-drive'
      ## - 'google-hangouts'
      # - 'iterm2'
@@ -19,7 +17,7 @@
      ## - 'macvim'
      # - 'royal-tsx'
      ## - 'skype'
-     ## - 'slack'
+      - 'slack'
      # - 'sling'
      # - 'spotify'
      ## - 'sublime-text'
@@ -31,7 +29,7 @@
      # - 'vmware-fusion'
     brew_packages:
       #- 'autoconf'
-      ##- 'bash-completion'
+      - 'bash-completion'
       ##- 'boot2docker'
       #- 'consul'
       ##- 'docker-compose'
@@ -45,7 +43,6 @@
       #- 'nomad'
       #- 'openssl'
       #- 'packer'
-      #- 'pyenv'
       #- 'python'
       #- 'rancher-compose'
       #- 'rbenv'
@@ -55,13 +52,13 @@
       #- 'terraform-inventory'
       #- 'terraform-provisioner-ansible'
       #- 'tmux'
-      ##- 'tree'
+      - 'tree'
       #- 'vault'
-      ##- 'wget'
+      - 'wget'
       #- 'zsh'
       #- 'zsh-syntax-highlighting'
-      ##- pyenv
-      ##- pyenv-virtualenv
-      ##- pyenv-virtualenvwrapper
+      - pyenv
+      - pyenv-virtualenv
+      - pyenv-virtualenvwrapper
   roles:
     - mac_setup

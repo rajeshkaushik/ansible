@@ -1,5 +1,23 @@
-#- name: include homebrew package install playbook
+##- name: include homebrew package install playbook
 #  include: ansible-macos-homebrew-packages.yml
+
+- name: install pathogen.vim plugin
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - ~/.vim/autoload
+    - ~/.vim/bundle
+
+- name: install pathogen.vim
+  get_url:
+      url: https://tpo.pe/pathogen.vim
+      dest: ~/.vim/autoload/pathogen.vim
+
+- name: clone color theme for vim
+  git: >
+      repo=https://github.com/morhetz/gruvbox.git
+      dest=~/.vim/bundle/gruvbox
 
 - name: copy vimrc file 
   copy:
@@ -10,27 +28,6 @@
   copy:
     src: files/inputrc
     dest: "{{home_dir}}.inputrc"
-
-- local_action: stat path=/Applications/{{ app_name }}.app
-  register: app_exists
-
-- command: mkdir -p ./tmp/
-  when: app_exists.stat.exists == False
-
-- copy: src=files/{{ app_name }}.dmg dest=./tmp/{{ app_name }}.dmg
-  when: app_exists.stat.exists == False
-
-- command: hdiutil attach ./tmp/{{ app_name }}.dmg -nobrowse -mountpoint ./tmp/{{ app_name }}
-  when: app_exists.stat.exists == False
-
-- shell: cp -aR ./tmp/{{ app_name }}/*.app /Applications/{{ app_name }}.app
-  when: app_exists.stat.exists == False
-
-- command: hdiutil detach ./tmp/{{ app_name }}/
-  when: app_exists.stat.exists == False
-
-- command: rm -R ./tmp/
-  when: app_exists.stat.exists == False
 
 - stat: path="{{home_dir}}.bash_profile"
   register: bash_profile_exists
