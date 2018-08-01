@@ -1,5 +1,5 @@
-##- name: include homebrew package install playbook
-#  include: ansible-macos-homebrew-packages.yml
+- name: include homebrew package install playbook
+  include: ansible-macos-homebrew-packages.yml
 
 - name: install pathogen.vim plugin
   file:
@@ -54,6 +54,3 @@
   shell: echo "source ~/.git-completion.bash" >> "{{home_dir}}.bash_profile"
   when: git_completion.stdout.find('git-completion.bash') == -1
 
-- name: install virtualenv
-  pip:
-    name: virtualenv
