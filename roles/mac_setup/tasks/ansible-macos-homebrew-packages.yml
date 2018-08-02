@@ -5,11 +5,11 @@
 - name: Installing Homebrew Packages
   homebrew:
     name: "{{ item }}"
-    state: "absent"
+    state: "present"
   with_items: '{{ brew_packages }}'
 
 - name: Installing Homebrew Cask Packages
   homebrew_cask:
     name: "{{ item }}"
-    state: "absent"
+    state: "present"
   with_items: '{{ brew_cask_packages }}'

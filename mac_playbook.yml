@@ -12,7 +12,7 @@
       - 'autoconf'
       - 'bash-completion'
       - 'git'
-      - 'git-lfs'
+      - 'htop'
       - 'tree'
       - 'wget'
       - pyenv
