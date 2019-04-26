@@ -1,3 +1,5 @@
 source ~/.git-completion.bash
+PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+export PIPENV_VENV_IN_PROJECT=true

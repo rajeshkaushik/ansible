@@ -18,5 +18,6 @@
       - pyenv
       - pyenv-virtualenv
       - pyenv-virtualenvwrapper
+      - mkcert
   roles:
     - mac_setup
