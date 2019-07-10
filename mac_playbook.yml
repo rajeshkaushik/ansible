@@ -15,9 +15,9 @@
       - 'htop'
       - 'tree'
       - 'wget'
-      - pyenv
-      - pyenv-virtualenv
-      - pyenv-virtualenvwrapper
-      - mkcert
+      - 'pyenv'
+      - 'pyenv-virtualenv'
+      - 'pyenv-virtualenvwrapper'
+      - 'mkcert'
   roles:
     - mac_setup
